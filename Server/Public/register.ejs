@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+  <%- include("../Public/header.ejs") %>
+
+  <div class="register_container">
+    <div class="register_card">
+      <h1>Registration Page</h1>
+
+      <form action="/register" method="POST" id="registerForm">
+        <label for="username">Username:</label>
+        <input type="text" name="username" class="register_input" required>
+
+        <label for="pax_name">Passenger Name:</label>
+        <input type="text" name="pax_name" class="register_input" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" class="register_input" required>
+
+        <input type="submit" value="Register" class="register_button">
+      </form>
+
+      <% if (locals.failed) { %>
+        <p class="register_error">Username already taken. Please try again.</p>
+      <% } %>
+
+      <div class="login_section">
+        <p>Already a user?</p>
+        <form action="/login" method="GET">
+          <button type="submit" class="login_link_button">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Flight</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+  <%- include("../Public/header.ejs") %>
+
+  <div class="booking-wrapper">
+    
+    <form action="/saveBooking" method="POST" id="bookingForm">
+      
+      <div class="flight-details-box">
+        <div class="box-header">
+            <h1><%= airlines %> <span class="flight-num">#<%= flight_number %></span></h1>
+        </div>
+        
+        <div class="box-body">
+            <div class="route-info">
+                <div class="point">
+                    <span class="code"><%= departure %></span>
+                    <span class="time"><%= departure_time %></span>
+                </div>
+                <div class="connector">
+                    <span class="arrow">✈</span>
+                </div>
+                <div class="point">
+                    <span class="code"><%= arrival %></span>
+                    <span class="time"><%= arrival_time %></span>
+                </div>
+            </div>
+
+            <div class="date-selection">
+                <label for="flight_date">Date of Travel</label>
+                <input type="date" id="flight_date" name="flight_date" required>
+            </div>
+        </div>
+      </div>
+
+      <input type="hidden" name="dep" value="<%= departure %>">
+      <input type="hidden" name="dep_time" value="<%= departure_time %>">
+      <input type="hidden" name="arr" value="<%= arrival %>">
+      <input type="hidden" name="arr_time" value="<%= arrival_time %>">
+      <input type="hidden" name="airline" value="<%= airlines %>">
+      <input type="hidden" name="flight_number" value="<%= flight_number %>">
+      <input type="hidden" id="selectedSeat" name="seat" value="">
+
+      <h3 class="seat-heading">Select Your Seat</h3>
+      <div class="seat-container">
+        <% for(let i = 1; i <= 30; i++) { %>
+          <div class="row">
+            <% for(let j = 0; j < 9; j++) { 
+                const seatLetter = String.fromCharCode(65 + j); %>
+                
+                <% if(j%3==0 && j!=0){ %>
+                  <div class="aisle-gap"></div>
+                <% } %>
+            
+              <div class="seat"><%= i + seatLetter %></div>
+            <% } %>
+          </div>
+        <% } %>
+      </div>
+
+      <button type="submit" class="book-btn">Confirm Booking</button>
+    </form>
+  </div>
+
+  <script>
+    const seats = document.querySelectorAll(".seat");
+    const selectedSeatInput = document.getElementById("selectedSeat");
+
+    seats.forEach(seat => {
+      seat.addEventListener("click", () => {
+        if (seat.classList.contains("selected")) {
+          seat.classList.remove("selected");
+          selectedSeatInput.value = "";
+        } else {
+          document.querySelectorAll(".seat").forEach(s => s.classList.remove("selected"));
+          seat.classList.add("selected");
+          selectedSeatInput.value = seat.textContent;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+

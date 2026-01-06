@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+  <%- include("../Public/header.ejs") %>
+
+  <div class="login_container">
+    <div class="login_card">
+      <h1>Login Page</h1>
+      <% if (locals.message) { %>
+        <p class="login_message">You must login before using our services.</p>
+      <% } %>
+
+      <form action="/login" method="POST" id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" name="username" class="login_input" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" class="login_input" required>
+
+        <input type="submit" value="Login" class="login_button">
+      </form>
+
+      <% if (locals.failed1) { %>
+        <p class="login_error">Either this username does not exist OR you entered the wrong password</p>
+      <% } else if (locals.failed2) { %>
+        <p class="login_error">Login Failed</p>
+      <% } %>
+
+      <div class="register_section">
+        <p>Not a user?</p>
+        <form action="/register" method="GET">
+          <button type="submit" class="register_button">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

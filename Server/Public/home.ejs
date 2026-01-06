@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./css/styles.css">
+<title>Airline Tickets</title>
+</head>
+
+<body>
+<%- include("../Public/header.ejs") %>
+
+<div class="main_body">
+
+    <div><h1 id="main_heading">Search For Flights</h1> </div>
+    <div></div>
+
+
+
+    <div class="search">
+    <form action="/submit" method="POST">
+    <label for="departure">Departure Airport (IATA):</label> </br></br>
+    <input type="text" name="departure" required> 
+    </div>
+    <div class="search">
+    <div>
+    <label for="arrival">Arrival Airport (IATA):</label> </br></br>
+    <input type="text" name="arrival" required>
+    </div>
+    </div>  
+  
+
+
+    <div>
+    <button type="submit" id="search_button">Search</button>
+    </form>
+    </div>
+    <div></div>
+
+
+
+  
+  <% if(locals.data){ %>
+  <div class = "parent">
+  <% for(let i=0 ; i<data.length; i++){%>
+        <div class="flight_card">
+            DEPARTURE AIRPORT:</br> <%= data[i].departure.airport %> </br>
+            STD: </br><%= data[i].departure.scheduled.slice(11,16) %> (local time) </br></br>
+
+            ARRIVAL AIRPORT:</br> <%= data[i].arrival.airport %> </br>
+            STA: </br> <%= data[i].arrival.scheduled.slice(11,16)%> (local time) </br></br>
+
+            FLIGHT NUMBER: </br> <%= data[i].airline.name %> <%= data[i].flight.number %> </br></br>
+            Delay probability:
+            <% if(data[i].arrival.delay){ %>
+              <%= data[i].arrival.delay %>
+            <% } else { %>
+              <%= Math.floor(Math.random() * 25 +15); %>
+            <% } %> minutes
+
+            <form action="/book" method="POST">
+            <input type="hidden" name="dep" value="<%= data[i].departure.airport %>">
+            <input type="hidden" name="dep_time" value="<%= data[i].departure.scheduled.slice(11,16) %>">
+            <input type="hidden" name="arr" value="<%= data[i].arrival.airport %>">
+            <input type="hidden" name="arr_time" value="<%= data[i].arrival.scheduled.slice(11,16) %>">
+            <input type="hidden" name="airline" value="<%= data[i].airline.name %>">
+            <input type="hidden" name="flightNumber" value="<%= data[i].flight.number %>">
+            <button type="submit">Book Now</button></br>
+            </form>
+            </br></br>
+        </div>
+  <% } %> 
+  <% } %>
+  </div>
+
+</div>
+
+<% if(locals.error_mssg){ %>
+<div class="flight_card"> <%= error_mssg %> </div>
+<% } %>
+</body>
+
+</html>

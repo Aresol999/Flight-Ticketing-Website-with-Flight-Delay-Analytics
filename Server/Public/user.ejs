@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    
+    <%- include("../Public/header.ejs") %>
+
+    <main class="user_flight_info">
+        
+        <H1>Your bookings are:</H1>
+        
+        <div class="booked_flight_card">Passenger Name: <%= name %> </div> 
+        
+        <br>
+
+        <% for(let i=0 ; i<data.length ; i++){ %>
+            <div class="booked_flight_card">
+                PNR: <%=  data[i].booking_pnr %> <br>
+                FLIGHT: <%= data[i].airline %> <%=  data[i].flight_number %> <br><br>
+                DEPARTURE AIRPORT: <%=  data[i].departure_airport %> <br>
+                DEPARTURE TIME: <%=  data[i].departure_time %> (local) <br><br>
+                ARRIVAL AIRPORT: <%=  data[i].arrival_airport %> <br>
+                ARRIVAL TIME: <%=  data[i].arrival_time %> (local) <br><br>
+                DATE: <%=  data[i].flight_date %> <br>
+                SEAT: <%=  data[i].seat %> <br>
+            </div>
+            <div class="card-spacer"></div>
+        <% } %>
+
+    </main>
+
+</body>
+</html>

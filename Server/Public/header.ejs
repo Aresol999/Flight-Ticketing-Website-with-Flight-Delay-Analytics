@@ -1,0 +1,40 @@
+<header>
+  <nav class="navbar">
+
+    <h1>Name</h1>
+
+    <button> Explore </button>
+
+    <button> Loyalty Program </button>
+
+    <button>Contact Us</button>
+    
+    <button>Help</button>
+
+    <form action="/" method="GET">
+        <button type="submit">Home</button>
+    </form>
+
+    <% if (!loggedInUser) { %>
+      <form action="/login" method="GET">
+        <button type="submit">Login</button>
+      </form>
+
+      <form action="/register" method="GET">
+        <button type="submit">Register</button>
+      </form>
+
+    <% } else { %>
+      <span id="user">Welcome </br> <strong><%= loggedInUser %></strong>!</span>
+
+      <form action="/userBookings" method="GET">
+        <button type="submit">My Bookings</button>
+      </form>
+
+      <form action="/logout" method="GET">
+        <button type="submit">Logout</button>
+      </form>
+    <% } %>
+
+  </nav>
+</header>
