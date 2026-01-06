@@ -1,6 +1,6 @@
 FLIGHT TICKETING WEBSITE WITH FLIGHT DELAY ANALYTICS
 
-A full-stack web application that simulates a real-world airline ticket booking workflow, built using Node.js, Express, EJS, and CSS. The project demonstrates end-to-end web development skills including server-side rendering, authentication flows, and modular application structure.
+A full-stack web application that simulates a real-world airline ticket booking workflow, built using Node.js, Express, EJS, CSS and PostgreSQL. The project demonstrates end-to-end web development skills including server-side rendering, authentication flows, and modular application structure.
 
 -------------------------------------------------------------------------------------------------------------------
 
@@ -13,9 +13,8 @@ This project models a simplified airline booking platform where users can authen
 INSTALLATION & RUN INSTRUCTIONS
 
 Prerequisites:
-
 Node.js installed 
-
+PostgreSQL installed
 
 
 Steps to Run the Project:
@@ -27,11 +26,13 @@ Steps to Run the Project:
 3. Install required dependencies by running:
    npm install
 
-4. Start the Express server using:
+4. Enter your AviationStack API credentials and your PostgreSQL credentials
+
+5. Start the Express server using:
    cd Server
    node server.js
 
-5. Open a web browser and search:
+6. Open a web browser and search:
    http://localhost:3000
 
 -------------------------------------------------------------------------------------------------------------------
@@ -39,26 +40,20 @@ Steps to Run the Project:
 TECHNOLOGY STACK
 
 Frontend:
-
 EJS (Embedded JavaScript Templates)
-
 HTML5
-
 CSS
 
-
 Backend:
-
 Node.js
-
 Express.js
 
+Database:
+PostgreSQL
 
 Tools:
-
 npm
-
-Express static asset handling
+Express, static asset handling
 
 -------------------------------------------------------------------------------------------------------------------
 
@@ -92,13 +87,11 @@ Enhanced UI/UX design skills for form-based web applications
 
 IMPROVEMENTS
 
-API-based flight data retrieval
-
 Payment gateway integration
 
 Role-based access (Admin / User)
 
-Cloud deployment (AWS / Render / Railway)
+Cloud deployment
 
 -------------------------------------------------------------------------------------------------------------------
 
