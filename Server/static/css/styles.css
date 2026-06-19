@@ -1,9 +1,11 @@
+/*-------------------------------- Variables & Theme --------------------------------*/
 :root {
     --primary-brown: #7A492D;
     --primary-dark: #4A2C1B;
     --accent-gold: #FFE18A;
     --accent-orange: #D93516;
     
+    /* Glassmorphism Variables */
     --glass-bg: rgba(0, 0, 0, 0.65); 
     --glass-card: rgba(255, 255, 255, 0.15);
     --glass-border: rgba(255, 255, 255, 0.2);
@@ -12,7 +14,7 @@
     --text-light: #ffffff;
     --text-muted: #d0d0d0;
     --font-main: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    --font-mono: "Courier New", Courier, monospace;
+    --font-mono: "Courier New", Courier, monospace; /* For ticket details */
 }
 
 * {
@@ -21,6 +23,7 @@
 
 body {
     font-family: var(--font-main);
+    /* Fallback and Image */
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     background-image: url('a380-A380-flying.webp'); 
     background-size: cover;
@@ -31,7 +34,7 @@ body {
     color: var(--text-light);
     margin: 0;
     padding: 0;
-    padding-top: 100px;
+    padding-top: 100px; /* Space for fixed header */
     min-height: 100vh;
 }
 
@@ -52,7 +55,7 @@ header {
     width: 100%;
     z-index: 1000;
     padding: 10px 0;
-    background: rgba(0, 0, 0, 0.7); 
+    background: rgba(0, 0, 0, 0.7); /* Darker glass for readability */
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--glass-border);
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
@@ -113,21 +116,23 @@ header {
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     
+    /* Grid layout */
     display: grid;
     grid-template-columns: 1fr 1fr; 
     gap: 25px;
     align-items: end;
 }
 
-.main_body > div:empty { display: none; } 
-.main_body > div:nth-child(1) { grid-column: 1 / -1; } 
-.main_body > div:last-child { grid-column: 1 / -1; width: 100%; } 
+.main_body > div:empty { display: none; } /* Clean up empty EJS divs */
+.main_body > div:nth-child(1) { grid-column: 1 / -1; } /* Heading */
+.main_body > div:last-child { grid-column: 1 / -1; width: 100%; } /* Results container */
 
 #main_heading { font-size: 3rem; margin-bottom: 10px; }
 
 .search { display: flex; flex-direction: column; }
 .search label { font-weight: bold; margin-bottom: 8px; color: var(--text-muted); }
 
+/* Global Input Styling */
 input[type="text"], input[type="date"], input[type="password"] {
     width: 100%;
     padding: 12px 15px;
@@ -162,7 +167,7 @@ input:focus {
     transform: translateY(-2px);
 }
 
-
+/* Flight Results Cards (Home) */
 .parent {
     margin-top: 30px;
     display: flex;
@@ -213,6 +218,7 @@ input:focus {
     align-items: center;
 }
 
+/* --- The Nice Box (Flight Details) --- */
 .flight-details-box {
     width: 100%;
     max-width: 600px;
@@ -220,7 +226,7 @@ input:focus {
     backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
-    overflow: hidden;
+    overflow: hidden; /* Keeps children inside rounded corners */
     box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     margin-bottom: 30px;
     animation: fadeIn 0.5s ease-out;
@@ -253,6 +259,7 @@ input:focus {
     padding: 30px;
 }
 
+/* Route Display (JFK -> LHR) */
 .route-info {
     display: flex;
     justify-content: space-between;
@@ -287,6 +294,7 @@ input:focus {
     padding: 0 10px;
 }
 
+/* Date Input Styling */
 .date-selection {
     display: flex;
     flex-direction: column;
@@ -336,11 +344,13 @@ input:focus {
     box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
     margin-bottom: 30px;
     
+    /* Center the rows */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Hide scrollbar for cleaner look */
 .seat-container::-webkit-scrollbar {
     width: 8px;
 }
@@ -356,7 +366,7 @@ input:focus {
 }
 
 .aisle-gap {
-    width: 30px;
+    width: 30px; /* Space between seat groups */
 }
 
 .seat {
@@ -390,6 +400,7 @@ input:focus {
     box-shadow: 0 0 10px var(--accent-orange);
 }
 
+/* Submit Button */
 .book-btn {
     background-color: var(--accent-gold);
     color: var(--primary-dark);
@@ -415,7 +426,9 @@ input:focus {
 }
 
 /*-------------------------------- User Page (My Bookings) --------------------------------*/
+/*-------------------------------- User Page (My Bookings) --------------------------------*/
 
+/* 1. Body and Container Setup */
 .user_flight_info {
     display: flex;
     flex-direction: column;
@@ -429,34 +442,43 @@ input:focus {
     margin-bottom: 30px;
 }
 
+/* 2. The Booking Card (Now styled as a Glass Dark Box) */
 .booked_flight_card {
+    /* Glassmorphism Base */
     background: var(--glass-bg);
     backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     border-radius: 20px;
     
+    /* Layout & Dimensions */
     width: 90%;
-    max-width: 800px;
+    max-width: 800px; /* Wider for better readability */
     padding: 30px;
-    margin-bottom: 25px;
+    margin-bottom: 25px; /* Spacing between cards */
     
+    /* Typography */
     color: var(--text-light);
     font-family: var(--font-main);
     font-size: 1.1rem;
     line-height: 1.6;
     text-align: left;
     
+    /* Transition for Hover */
     transition: transform 0.3s ease, background 0.3s ease;
 }
 
+/* Hover Effect */
 .booked_flight_card:hover {
     transform: translateY(-5px);
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.75); /* Slightly darker on hover */
     border-color: var(--accent-gold);
 }
+
+/* 3. The Passenger Name Header (First Card) */
+/* styling this to look like a Section Header instead of a ticket stub */
 .booked_flight_card:first-of-type {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1); /* Lighter glass */
     border: 1px solid var(--accent-gold);
     color: var(--accent-gold);
     
@@ -470,6 +492,7 @@ input:focus {
     max-width: 600px;
 }
 
+/* Highlight labels inside the text (optional visual improvement for the plain text) */
 .booked_flight_card b, 
 .booked_flight_card strong {
     color: var(--accent-gold);

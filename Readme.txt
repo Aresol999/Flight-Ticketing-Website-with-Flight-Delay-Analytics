@@ -1,107 +1,81 @@
-FLIGHT TICKETING WEBSITE WITH FLIGHT DELAY ANALYTICS
+# FLIGHT TICKETING WEBSITE WITH FLIGHT DELAY ANALYTICS
 
-A full-stack web application that simulates a real-world airline ticket booking workflow, built using Node.js, Express, EJS, and CSS. The project demonstrates end-to-end web development skills including server-side rendering, authentication flows, and modular application structure.
+A full-stack, enterprise-ready web application that simulates a real-world airline ticket booking workflow. Built using Node.js, Express, EJS, and PostgreSQL, this project demonstrates production-grade engineering patterns including low-latency caching, secure cryptographic hashing, and atomic transaction handling under high concurrency.
 
--------------------------------------------------------------------------------------------------------------------
+---
 
-PROJECT OVERVIEW
+## PROJECT OVERVIEW
 
-This project models a simplified airline booking platform where users can authenticate, search for flights, and complete a booking flow through dynamically rendered web pages. The application follows a clean separation of concerns between frontend templates, backend routing logic, and static assets.
+This application models an end-to-end flight booking platform where users can securely authenticate, query live aerospace routing data, and complete seat reservations. Moving beyond standard mock-data applications, this system architecture leverages external REST APIs, implements localized caching layers to respect API rate limits, and uses strict relational data constraints to guarantee write-atomicity.
 
--------------------------------------------------------------------------------------------------------------------
+---
 
-INSTALLATION & RUN INSTRUCTIONS
+## ARCHITECTURAL HIGHLIGHTS & KEY FEATURES
 
-Prerequisites:
+* **Live Aviation Data Integration:** Integrates the third-party AviationStack REST API to pull real-time commercial airline schedules and routing matrices rather than relying on hardcoded stub data.
+* **Upstream Data Filtering:** Automatically sanitizes upstream API responses by filtering out codeshared flights, delivering a clean, non-redundant inventory matrix to the client.
+* **Low-Latency Caching Layer (Redis):** Implements Redis cache engines for route lookups (`flights:DEP-ARR`) with a 5-minute Sliding Window Expiration (`EX: 300`). This drastically reduces downstream API latency from seconds to single-digit milliseconds while shielding upstream servers from rate-limiting penalties.
+* **Concurrency & High-Availability Safeguards:** Enforces database-level ACID atomicity via explicit unique relational constraints (`unique_flight_seat`). Simultaneously incoming booking requests for identical seats are handled safely, avoiding race conditions and returning a clean 409 Conflict state.
+* **Cryptographic Security Foundations:** Avoids plain-text vulnerability by utilizing `bcrypt` for password salting and slow-hashing algorithms (10 salt rounds) during user provisioning and authorization stages.
+* **Session-State Persistence:** Manages user session tokens statefully across application views via server-side session middleware paired with secure HTTP-only cookies.
 
-Node.js installed 
+---
 
+## TECHNOLOGY STACK
 
+* **Frontend Architecture:** EJS (Embedded JavaScript Templates), HTML5, CSS3 for server-side dynamic rendering.
+* **Backend Architecture:** Node.js, Express.js (REST Routing Architecture).
+* **Caching Engine:** Redis Cache Server.
+* **Database Engine:** PostgreSQL (Relational Pooling System).
+* **Tools & Protocols:** Axios HTTP Client, Bcrypt, PG Pool Manager, Body-Parser.
 
-Steps to Run the Project:
+---
 
-1. Clone the repository/download ZIP
+## INSTALLATION & RUN INSTRUCTIONS
 
-2. Open the project folder in a terminal/command prompt
+### Prerequisites
+* Node.js (v16+ recommended)
+* PostgreSQL Server installed
+* Redis Cache Server installed
 
-3. Install required dependencies by running:
-   npm install
+### Steps to Run the Project
 
-4. Start the Express server using:
-   cd Server
-   node server.js
+1. Clone the repository
 
-5. Open a web browser and search:
-   http://localhost:3000
+2. Install Ecosystem Dependencies:
 
--------------------------------------------------------------------------------------------------------------------
+	npm install
 
-TECHNOLOGY STACK
+3. Configure Environment Credentials:
+	Open server.js and replace the entry placeholders with your specific AviationStack Access Key and local PostgreSQL credentials.
 
-Frontend:
+4. Initialize Database Instance:
+	Spin up your local PostgreSQL shell and run:	
 
-EJS (Embedded JavaScript Templates)
+	CREATE DATABASE "Flight_Tickets";
 
-HTML5
+5. Initialize Redis Cache Daemon:
 
-CSS
+	brew services start redis
 
+6. Start the Server:
+	cd Server
+	node server.js
 
-Backend:
+7. Access UI Layer:
 
-Node.js
+	Launch a browser and open http://localhost:3000
 
-Express.js
+--
 
+## FUTURE DEVELOPMENT ROADMAP
+* Using a message queue like Apache Kafka or Apache ActiveMQ to handle heavy user traffic.
 
-Tools:
+* Cloud Native Orchestration: Containerize application blueprints with Docker and host on AWS/GCP infrastructures.
 
-npm
+* Adding a self-built ML model for delay probability prediction.
 
-Express static asset handling
+--
 
--------------------------------------------------------------------------------------------------------------------
-
-CORE FUNCTIONALITIES
-
-User registration and login system
-
-Flight search interface
-
-Ticket booking workflow
-
-Session-based navigation across views
-
-Modular reusable header and layout components
-
--------------------------------------------------------------------------------------------------------------------
-
-LEARNING OUTCOMES
-
-Hands-on experience with Express server design
-
-Practical use of template rendering for dynamic page generation
-
-Applied clean project structuring for real-world applications
-
-Improved understanding of HTTP requests, routing, and middleware
-
-Enhanced UI/UX design skills for form-based web applications
-
--------------------------------------------------------------------------------------------------------------------
-
-IMPROVEMENTS
-
-API-based flight data retrieval
-
-Payment gateway integration
-
-Role-based access (Admin / User)
-
-Cloud deployment (AWS / Render / Railway)
-
--------------------------------------------------------------------------------------------------------------------
-
-AUTHOR
-
+##AUTHOR
 Arnav Kadyan
