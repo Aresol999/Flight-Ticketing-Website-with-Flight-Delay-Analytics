@@ -77,5 +77,5 @@ This application models an end-to-end flight booking platform where users can se
 
 --
 
-##AUTHOR
+## AUTHOR
 Arnav Kadyan
