@@ -59,10 +59,11 @@ This application models an end-to-end flight booking platform where users can se
 	brew services start redis
 
 6. Start the Server:
+   
 	cd Server
 	node server.js
 
-7. Access UI Layer:
+8. Access UI Layer:
 
 	Launch a browser and open http://localhost:3000
 
