@@ -61,6 +61,7 @@ This application models an end-to-end flight booking platform where users can se
 6. Start the Server:
    
 	cd Server
+
 	node server.js
 
 8. Access UI Layer:
